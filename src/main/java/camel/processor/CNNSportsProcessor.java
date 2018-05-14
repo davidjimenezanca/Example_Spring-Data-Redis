@@ -18,14 +18,14 @@ package camel.processor;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-
 import org.springframework.data.redis.core.SetOperations;
-import org.springframework.data.redis.core.RedisTemplate;
+
+import javax.annotation.Resource;
 
 public class CNNSportsProcessor implements Processor {
 
-    //@Resource(name="redisTemplate")
-    //private SetOperations<String, String> setOps;
+    @Resource(name="redisTemplate")
+    private SetOperations<String, String> setOps;
 
     @Override
     public void process(Exchange exchange) throws Exception {
@@ -35,7 +35,7 @@ public class CNNSportsProcessor implements Processor {
         String[] subItem = item[1].split("<description>");
         String[] description = subItem[1].split("</description>");
         String[] textDescription = description[0].split("div class");
-        //setOps.add("CNN_sports", textDescription);
+        setOps.add("CNN_sports", textDescription);
     }
 
 }

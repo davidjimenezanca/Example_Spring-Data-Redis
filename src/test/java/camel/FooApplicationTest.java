@@ -20,13 +20,14 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.TimeUnit;
 
-//@Ignore // enable me to run this test as well so we can cover testing the route
+@Ignore // enable me to run this test as well so we can cover testing the route
 public class FooApplicationTest extends CamelSpringTestSupport {
 
     private CamelContext camelContext;
