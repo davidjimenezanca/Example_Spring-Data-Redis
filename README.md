@@ -1,10 +1,10 @@
-# Spring Data Redis with Apache Camel RSS feed
+﻿# Spring Data Redis with Apache Camel RSS feed
 
 Example project of Spring Data for Redis, in-memory data structure store.
 
 Redis data are stored with Camel RSS component (Available as of Camel version 2.0), getting a news feed.
 
-## Redis
+# Redis
 
 Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs and geospatial indexes with radius queries. 
 
@@ -27,7 +27,7 @@ Lettuce connections are designed to be thread-safe so one connection can be shar
 So, you won't find any connection pool configuration in this repository.
 
 
-## Apache Camel RSS Component
+# Apache Camel RSS Component
 
 The rss component is used for polling RSS feeds in several threads from CNN news channel. 
 
@@ -38,7 +38,7 @@ The component currently only supports polling (consuming) feeds.
 Camel-rss internally uses a patched version of ROME hosted on ServiceMix to solve some OSGi class loading issues.
 
 
-### Prerequisites
+## Prerequisites
 
 You will need following to run this application:
 
@@ -47,11 +47,11 @@ You will need following to run this application:
 - [Java 8+](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 - [Maven 2+](https://maven.apache.org/)
 
-### Starting the application
+## Starting the application
 
-As first step start Redis DB: the configuration is done for local Redis server.
+As first step start the installation of Redis DB. Configuration is done for local Redis server.
 
-After that you can start the application using maven:
+After that you can start this application using maven:
 
 mvn camel:run
 
@@ -59,14 +59,14 @@ Once feed's consumer is started Redis data are stored as Sets type in XML format
 
 Note 1: This is a console app
 
-Note 2: Please be aware that, each time the process is started, data are evicted from Redis DB
+Note 2: Please be aware that, each time the process is started, data are evicted from Redis
 
 Note 3: You can stop Camel Consumer just tipyng Ctrl+C at Terminal
 
 
 # See Also
 
-- [Redis] (https://redis.io/)
-- [Lettuce client] (https://lettuce.io/)
+- [Redis](https://redis.io)
+- [Lettuce client](https://lettuce.io)
 - [Spring Data Redis](https://projects.spring.io/spring-data-redis/)
 - [Apache Camel GitHub](https://github.com/apache/camel)
