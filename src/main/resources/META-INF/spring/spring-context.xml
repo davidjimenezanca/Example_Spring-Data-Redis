@@ -26,7 +26,7 @@
          http://www.springframework.org/schema/context
 	     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <context:component-scan base-package="camel.route"/>
+    <context:component-scan base-package="camel.route, redis"/>
 
     <!-- this is Camel -->
     <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
@@ -37,24 +37,16 @@
     <bean id="cnnRoutesBuilder" class="camel.route.CNNRoutesBuilder"/>
 
     <!-- Redis -->
+    <bean id="stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
     <bean id="connectionFactory" class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory">
-        <constructor-arg index="0" ref="lettucePool" />
-    </bean>
-
-    <bean id="lettucePool" class="org.springframework.data.redis.connection.lettuce.DefaultLettucePool">
-        <property name="hostName" value="localhost" />
-        <property name="port" value="6379" />
-        <property name="poolConfig" ref="lettucePoolConfiguration" />
-    </bean>
-
-    <bean id="lettucePoolConfiguration" class="org.springframework.data.redis.connection.PoolConfig">
-        <property name="maxActive" value="40" />
-        <property name="maxIdle" value="25" />
-        <property name="minIdle" value="15" />
+        <property name="hostName" value="localhost"/>
+        <property name="port" value="6379"/>
     </bean>
 
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
-          p:connection-factory-ref="connectionFactory"/>
+          p:connection-factory-ref="connectionFactory"
+          p:defaultSerializer-ref="stringRedisSerializer"/>
     <!-- end of Redis -->
 
 </beans>

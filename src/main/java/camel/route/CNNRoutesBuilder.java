@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 package camel.route;
+
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.rss.RssEndpoint;
 import org.springframework.data.redis.core.SetOperations;
@@ -35,33 +36,69 @@ public class CNNRoutesBuilder extends RouteBuilder {
         // Sport news RSS feed
         RssEndpoint endpointSport =
                 endpoint("rss:http://rss.cnn.com/rss/edition_sport.rss", RssEndpoint.class);
+        // World news RSS feed
+        RssEndpoint endpointWorld =
+                endpoint("rss:http://rss.cnn.com/rss/edition_world.rss", RssEndpoint.class);
+        // Money news RSS feed
+        RssEndpoint endpointMoney =
+                endpoint("rss:http://rss.cnn.com/rss/money_news_international.rss", RssEndpoint.class);
 
         // START SNIPPET: e1
         from(endpointLatest).routeId("CNN:latest").startupOrder(1)
-                            .streamCaching().threads(10)
+                            .threads(5)
                             .marshal().rss()
                             .process(exchange -> {
-                                String body = exchange.getIn().getBody(String.class);
-                                body = body.replaceAll(">\\s+<", "><").trim();
-                                String[] item = body.split("<item>");
-                                String[] subItem = item[1].split("<description>");
-                                String[] description = subItem[1].split("</description>");
-                                String[] textDescription = description[0].split("div class");
-                                setOps.add("CNN_latest", textDescription);
+                                        String body = exchange.getIn().getBody(String.class);
+                                        body = body.replaceAll(">\\s+<", "><").trim();
+                                        String[] item = body.split("<item>");
+                                        String[] subItem = item[1].split("<description>");
+                                        String[] description = subItem[1].split("</description>");
+                                        String[] textDescription = description[0].split("div class");
+                                        setOps.add("CNN_latest", textDescription);
+                                        setOps.getOperations().persist("CNN_latest");
                             });
 
         from(endpointSport).routeId("CNN:sport").startupOrder(2)
-                           .streamCaching().threads(5)
+                           .threads(2)
                            .marshal().rss()
                            .process(exchange -> {
-                               String body = exchange.getIn().getBody(String.class);
-                               body = body.replaceAll(">\\s+<", "><").trim();
-                               String[] item = body.split("<item>");
-                               String[] subItem = item[1].split("<description>");
-                               String[] description = subItem[1].split("</description>");
-                               String[] textDescription = description[0].split("div class");
-                               setOps.add("CNN_sports", textDescription);
+                                       String body = exchange.getIn().getBody(String.class);
+                                       body = body.replaceAll(">\\s+<", "><").trim();
+                                       String[] item = body.split("<item>");
+                                       String[] subItem = item[1].split("<description>");
+                                       String[] description = subItem[1].split("</description>");
+                                       String[] textDescription = description[0].split("div class");
+                                       setOps.add("CNN_sports", textDescription);
+                                       setOps.getOperations().persist("CNN_sports");
                            });
+
+        from(endpointWorld).routeId("CNN:world").startupOrder(3)
+                           .threads(2)
+                           .marshal().rss()
+                           .process(exchange -> {
+                                        String body = exchange.getIn().getBody(String.class);
+                                        body = body.replaceAll(">\\s+<", "><").trim();
+                                        String[] item = body.split("<item>");
+                                        String[] subItem = item[1].split("<description>");
+                                        String[] description = subItem[1].split("</description>");
+                                        String[] textDescription = description[0].split("div class");
+                                        setOps.add("CNN_world", textDescription);
+                                        setOps.getOperations().persist("CNN_world");
+                            });
+
+        from(endpointMoney).routeId("CNN:money").startupOrder(4)
+                           .threads(5)
+                           .marshal().rss()
+                           .process(exchange -> {
+                                        String body = exchange.getIn().getBody(String.class);
+                                        body = body.replaceAll(">\\s+<", "><").trim();
+                                        String[] item = body.split("<item>");
+                                        String[] subItem = item[1].split("<description>");
+                                        String[] description = subItem[1].split("</description>");
+                                        String[] textDescription = description[0].split("div class");
+                                        setOps.add("CNN_money", textDescription);
+                                        setOps.getOperations().persist("CNN_money");
+                            });
         // END SNIPPET: e1
     }
 

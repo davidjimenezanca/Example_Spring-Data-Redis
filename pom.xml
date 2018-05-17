@@ -36,7 +36,6 @@
     <spring.version>4.3.2.RELEASE</spring.version>
     <camel.version>2.21.0</camel.version>
     <junit.version>4.11</junit.version>
-    <log4j.version>2.9.0</log4j.version>
   </properties>
 
   <dependencies>
@@ -57,36 +56,11 @@
       <artifactId>spring-core</artifactId>
       <version>${spring.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
     <!-- Lettuce Redis client -->
     <dependency>
       <groupId>biz.paluch.redis</groupId>
       <artifactId>lettuce</artifactId>
       <version>3.5.0.Final</version>
-    </dependency>
-    <!-- Redis DB pool -->
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-pool2</artifactId>
-      <version>2.0</version>
-    </dependency>
-
-    <!-- logging -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>${log4j.version}</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>${log4j.version}</version>
-      <scope>runtime</scope>
     </dependency>
 
     <!-- testing dependencies -->
@@ -118,7 +92,7 @@
       <name>Spring Releases</name>
       <url>https://repo.spring.io/libs-release</url>
       <snapshots>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
       </snapshots>
     </repository>
   </repositories>
