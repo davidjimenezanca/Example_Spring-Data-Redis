@@ -63,7 +63,7 @@ Note 1: This is a console app
 
 Note 2: Please be aware that, each time the process is started, all data are evicted from Redis
 
-Note 3: You can stop Camel Consumer just tipyng Ctrl+C at Terminal
+Note 3: You can stop Camel Consumer just typing 'Ctrl+C' at Terminal
 
 
 # See Also
