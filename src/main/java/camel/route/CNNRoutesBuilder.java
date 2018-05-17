@@ -15,13 +15,16 @@
  * limitations under the License.
  */
 package camel.route;
-
-import camel.processor.CNNLatestProcessor;
-import camel.processor.CNNSportsProcessor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.rss.RssEndpoint;
+import org.springframework.data.redis.core.SetOperations;
+
+import javax.annotation.Resource;
 
 public class CNNRoutesBuilder extends RouteBuilder {
+
+    @Resource(name="redisTemplate")
+    private SetOperations<String, String> setOps;
 
     @Override
     public void configure() throws Exception {
@@ -37,12 +40,28 @@ public class CNNRoutesBuilder extends RouteBuilder {
         from(endpointLatest).routeId("CNN:latest").startupOrder(1)
                             .streamCaching().threads(10)
                             .marshal().rss()
-                            .process(new CNNLatestProcessor());
+                            .process(exchange -> {
+                                String body = exchange.getIn().getBody(String.class);
+                                body = body.replaceAll(">\\s+<", "><").trim();
+                                String[] item = body.split("<item>");
+                                String[] subItem = item[1].split("<description>");
+                                String[] description = subItem[1].split("</description>");
+                                String[] textDescription = description[0].split("div class");
+                                setOps.add("CNN_latest", textDescription);
+                            });
 
         from(endpointSport).routeId("CNN:sport").startupOrder(2)
                            .streamCaching().threads(5)
                            .marshal().rss()
-                           .process(new CNNSportsProcessor());
+                           .process(exchange -> {
+                               String body = exchange.getIn().getBody(String.class);
+                               body = body.replaceAll(">\\s+<", "><").trim();
+                               String[] item = body.split("<item>");
+                               String[] subItem = item[1].split("<description>");
+                               String[] description = subItem[1].split("</description>");
+                               String[] textDescription = description[0].split("div class");
+                               setOps.add("CNN_sports", textDescription);
+                           });
         // END SNIPPET: e1
     }
 
