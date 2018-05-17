@@ -51,10 +51,12 @@ public class CNNRoutesBuilder extends RouteBuilder {
                                         String body = exchange.getIn().getBody(String.class);
                                         body = body.replaceAll(">\\s+<", "><").trim();
                                         String[] item = body.split("<item>");
-                                        String[] subItem = item[1].split("<description>");
-                                        String[] description = subItem[1].split("</description>");
-                                        String[] textDescription = description[0].split("div class");
-                                        setOps.add("CNN_latest", textDescription);
+                                        String[] subItem = item[1].split("<media:group");
+                                        String description = subItem[0];
+                                        description = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><news>".
+                                                        concat(description).
+                                                        concat("</news>");
+                                        setOps.add("CNN_latest", description);
                                         setOps.getOperations().persist("CNN_latest");
                             });
 
@@ -65,10 +67,12 @@ public class CNNRoutesBuilder extends RouteBuilder {
                                        String body = exchange.getIn().getBody(String.class);
                                        body = body.replaceAll(">\\s+<", "><").trim();
                                        String[] item = body.split("<item>");
-                                       String[] subItem = item[1].split("<description>");
-                                       String[] description = subItem[1].split("</description>");
-                                       String[] textDescription = description[0].split("div class");
-                                       setOps.add("CNN_sports", textDescription);
+                                       String[] subItem = item[1].split("<media:group");
+                                       String description = subItem[0];
+                                       description = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><news>".
+                                                       concat(description).
+                                                       concat("</news>");
+                                       setOps.add("CNN_sports", description);
                                        setOps.getOperations().persist("CNN_sports");
                            });
 
@@ -79,10 +83,12 @@ public class CNNRoutesBuilder extends RouteBuilder {
                                         String body = exchange.getIn().getBody(String.class);
                                         body = body.replaceAll(">\\s+<", "><").trim();
                                         String[] item = body.split("<item>");
-                                        String[] subItem = item[1].split("<description>");
-                                        String[] description = subItem[1].split("</description>");
-                                        String[] textDescription = description[0].split("div class");
-                                        setOps.add("CNN_world", textDescription);
+                                        String[] subItem = item[1].split("<media:group");
+                                        String description = subItem[0];
+                                        description = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><news>".
+                                                       concat(description).
+                                                       concat("</news>");
+                                        setOps.add("CNN_world", description);
                                         setOps.getOperations().persist("CNN_world");
                             });
 
@@ -93,10 +99,12 @@ public class CNNRoutesBuilder extends RouteBuilder {
                                         String body = exchange.getIn().getBody(String.class);
                                         body = body.replaceAll(">\\s+<", "><").trim();
                                         String[] item = body.split("<item>");
-                                        String[] subItem = item[1].split("<description>");
-                                        String[] description = subItem[1].split("</description>");
-                                        String[] textDescription = description[0].split("div class");
-                                        setOps.add("CNN_money", textDescription);
+                                        String[] subItem = item[1].split("<media:thumbnail");
+                                        String description = subItem[0];
+                                        description = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><news>".
+                                                       concat(description).
+                                                       concat("</news>");
+                                        setOps.add("CNN_money", description);
                                         setOps.getOperations().persist("CNN_money");
                             });
         // END SNIPPET: e1
