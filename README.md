@@ -72,3 +72,10 @@ Note 3: You can stop Camel Consumer just typing 'Ctrl+C' at Terminal
 - [Lettuce client](https://lettuce.io)
 - [Spring Data Redis](https://projects.spring.io/spring-data-redis/)
 - [Apache Camel GitHub](https://github.com/apache/camel)
+
+
+# Author
+
+David Jiménez Anca : https://twitter.com/davidjimenezanc
+
+
