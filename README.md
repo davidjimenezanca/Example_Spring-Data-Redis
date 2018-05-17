@@ -49,9 +49,11 @@ You will need following to run this application:
 
 ## Starting the application
 
-As first step start the installation of Redis DB. Configuration is done for local Redis server.
+As first step you will need to install and start a Redis DB. 
 
-After that you can start this application using maven:
+In this project client's configuration is done for a running local Redis server.
+
+After that you can start this application using maven: just typing:
 
 mvn camel:run
 
@@ -59,7 +61,7 @@ Once feed's consumer is started Redis data are stored as Sets type in XML format
 
 Note 1: This is a console app
 
-Note 2: Please be aware that, each time the process is started, data are evicted from Redis
+Note 2: Please be aware that, each time the process is started, all data are evicted from Redis
 
 Note 3: You can stop Camel Consumer just tipyng Ctrl+C at Terminal
 
