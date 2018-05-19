@@ -20,6 +20,8 @@ Lettuce is a fully non-blocking Redis client built with netty providing Reactive
 
 This example is building with Lettuce 3: a scalable thread-safe Java RedisClient providing both synchronous and asynchronous connections for server.
 
+- [Lettuce client 3](https://lettuce.io/lettuce-3/release/api/)
+
 ### Redis connection pool
 
 Lettuce connections are designed to be thread-safe so one connection can be shared amongst multiple threads and Lettuce connections auto-reconnection by default. While connection pooling is not necessary in most cases it can be helpful in certain use cases.
@@ -43,7 +45,6 @@ Camel-rss internally uses a patched version of ROME hosted on ServiceMix to solv
 You will need following to run this application:
 
 - [Redis 4+](https://redis.io/download)
-- [Lettuce client 3](https://lettuce.io/lettuce-3/release/api/)
 - [Java 8+](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 - [Maven 2+](https://maven.apache.org/)
 
