@@ -38,7 +38,7 @@ public class CNNRoutesBuilder extends RouteBuilder {
                 endpoint("rss:http://rss.cnn.com/rss/edition_sport.rss", RssEndpoint.class);
         // World news RSS feed
         RssEndpoint endpointWorld =
-                endpoint("rss:http://rss.cnn.com/rss/edition_world.rss", RssEndpoint.class);
+                endpoint("rss:http://rss.cnn.com/rss/edition_europe.rss", RssEndpoint.class);
         // Money news RSS feed
         RssEndpoint endpointMoney =
                 endpoint("rss:http://rss.cnn.com/rss/money_news_international.rss", RssEndpoint.class);
@@ -56,6 +56,7 @@ public class CNNRoutesBuilder extends RouteBuilder {
                                         description = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><news>".
                                                         concat(description).
                                                         concat("</news>");
+
                                         setOps.add("CNN_latest", description);
                                         setOps.getOperations().persist("CNN_latest");
                             });
@@ -72,11 +73,12 @@ public class CNNRoutesBuilder extends RouteBuilder {
                                        description = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><news>".
                                                        concat(description).
                                                        concat("</news>");
+
                                        setOps.add("CNN_sports", description);
                                        setOps.getOperations().persist("CNN_sports");
                            });
 
-        from(endpointWorld).routeId("CNN:world").startupOrder(3)
+        from(endpointWorld).routeId("CNN:europe").startupOrder(3)
                            .threads(2)
                            .marshal().rss()
                            .process(exchange -> {
@@ -88,8 +90,9 @@ public class CNNRoutesBuilder extends RouteBuilder {
                                         description = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><news>".
                                                        concat(description).
                                                        concat("</news>");
-                                        setOps.add("CNN_world", description);
-                                        setOps.getOperations().persist("CNN_world");
+
+                                        setOps.add("CNN_europe", description);
+                                        setOps.getOperations().persist("CNN_europe");
                             });
 
         from(endpointMoney).routeId("CNN:money").startupOrder(4)
@@ -104,6 +107,7 @@ public class CNNRoutesBuilder extends RouteBuilder {
                                         description = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><news>".
                                                        concat(description).
                                                        concat("</news>");
+
                                         setOps.add("CNN_money", description);
                                         setOps.getOperations().persist("CNN_money");
                             });
