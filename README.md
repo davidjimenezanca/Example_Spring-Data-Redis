@@ -77,6 +77,9 @@ Note 3: You can stop Camel Consumer just typing 'Ctrl+C' at Terminal
 
 # Author
 
-David Jiménez Anca : https://twitter.com/davidjimenezanc
+- David Jiménez Anca : https://twitter.com/davidjimenezanc
+- mailto: dvdancca@gmail.com
+- Upwork profile: https://www.upwork.com/fl/davidjimenez3
+
 
 
