@@ -20,7 +20,7 @@
 
     <groupId>org.spring.data.redis</groupId>
     <artifactId>spring</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>Spring :: Spring Data :: Apache Camel :: Redis DB</name>
@@ -33,7 +33,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring.version>4.3.2.RELEASE</spring.version>
+        <spring.version>4.3.18.RELEASE</spring.version>
         <camel.version>2.21.0</camel.version>
         <junit.version>4.11</junit.version>
     </properties>
